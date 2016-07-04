@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>加载图片</title>
+	<style type="text/css">
+	.bottle-content{position: relative;width: 100%;height:600px;}
+	.bottle-content .img_2{height:67px;width:56px;position:absolute;left:44.1%;top:27.8%;}
+	.bottle-content .img_3{height:99px;width:41px;position:absolute;left:46%;top:50.7%;}
+	.bottle-content .img_3 div{height:100%;width:100%;position: relative;overflow: hidden;border-bottom-right-radius: 15px;border-bottom-left-radius: 15px}
+		.img_3 .bottle-co{position:absolute;height: 99px;width: 41px;left: 0;top:0;}
+		.img_3 .bottle-tianchong{position:absolute; height:67px;width:100%;bottom:-100%;left: 0;}
+	.bottle-content .p-font{position:absolute;left:46%;top:70.7%;font-size: 24px;color:#000;}
+	.img_bg{width:100%;display: block;}
+	.bottle-content .img_fruit{position:absolute;}
+	.bottle-content .fruit-one{width:21px;height:25px;left:48.5%;top:31.7%;}
+	.hide{display: none;}
+	.pt-page-straght-down{
+		-webkit-animation:straght-down 0.5s both linear;animation:straght-down 0.5s both linear;animation-iteration-count: infinite;-webkit-animation-iteration-count: infinite;
+	}
+	@keyframes straght-down{
+		from{opacity: 1;}
+		to{-webkit-transform:translateY(100px);transform:translateY(100px);opacity:0;}
+	}
+
+
+	.pt-page-disappear{
+		-webkit-animation:disappear 2s both linear;animation:disappear 2s both linear;animation-iteration-count: 1;-webkit-animation-iteration-count: 1;
+	}
+	@keyframes disappear{
+		from{opacity: 1;}
+		to{opacity: 0;}
+	}
+	</style>
+</head>
+<body >
+	<div class="bottle-content" style="background-color: #70C767">
+		<img src="http://img10.360buyimg.com/cms/jfs/t2806/4/168510475/2949/9698bd10/57067850N427758f5.png" alt="" class="img_2">
+        <div class="img_3">
+        	<div>
+        		<img src="http://img10.360buyimg.com/cms/jfs/t2155/109/2427079784/2462/c9c492e0/57067a4fNc92afbe3.png" alt="" class="bottle-co">
+        		<img class="bottle-tianchong" src="http://img14.360buyimg.com/cms/jfs/t2632/316/188655655/836/1ba9a88c/57068f6bN5bf279e6.png" alt=""></img>
+        	</div>
+        </div>
+		<p class="p-font" id="loaded-text">0%</p>
+
+		<img src="http://img14.360buyimg.com/cms/jfs/t2347/186/2446074212/994/c2cf3438/57066341N71922ac0.png" alt="" class="img_fruit fruit-one pt-page-straght-down">
+	</div>
+</body>
+<script src="http://apps.bdimg.com/libs/zepto/1.1.4/zepto.min.js"></script>
+<script type="text/javascript">
+	var config = [
+		'http://img14.360buyimg.com/cms/jfs/t2632/316/188655655/836/1ba9a88c/57068f6bN5bf279e6.png',
+		'http://img10.360buyimg.com/cms/jfs/t2155/109/2427079784/2462/c9c492e0/57067a4fNc92afbe3.png',
+		'http://img14.360buyimg.com/cms/jfs/t2584/338/143819347/185375/f5884a5f/5705317dN9d1a400c.png',
+		'http://img12.360buyimg.com/cms/jfs/t2350/174/2341099652/43715/eca2b0a3/5703fc6cN20e31c08.jpg',
+		'http://img13.360buyimg.com/cms/jfs/t2386/329/2409554247/74958/45dfafc9/5703fc6cNc915f4bb.jpg',
+		'http://img12.360buyimg.com/cms/jfs/t2143/70/2372267613/226082/7231f9b/5703f2e8Nd38d96d3.png',
+		'http://img10.360buyimg.com/cms/jfs/t2857/326/124441319/150595/d5a8a127/5703f2e1N03311399.png',
+		'http://img13.360buyimg.com/cms/jfs/t2446/335/2392884775/189102/1626afd5/5703e81bN25e6aea2.png',
+		'http://img10.360buyimg.com/cms/jfs/t2743/269/131061155/6039/48687bf8/5703e682N0148ee66.jpg',
+		'http://img13.360buyimg.com/cms/jfs/t2752/120/125716256/124209/bb8c4500/5703d8a9N8e0cfa10.png',
+		'http://img14.360buyimg.com/cms/jfs/t2626/156/131280875/285521/6f36a7b5/5703d8a8Nc553a2ea.png',
+		'http://img14.360buyimg.com/cms/jfs/t2890/21/118789620/2388/6255b708/5703d2f6N5cd3e599.png',
+		'http://img12.360buyimg.com/cms/jfs/t2884/365/134533339/254753/96ffae29/5703d01fN85a78a71.png',
+		'http://img13.360buyimg.com/cms/jfs/t2443/188/2297244134/1501/1175946f/5703d8a9N8fe77ccf.png',
+		'http://img10.360buyimg.com/cms/jfs/t2152/163/2353996857/1526/6d14df96/5703d8a9N28dd6d3e.png',
+		'http://img10.360buyimg.com/cms/jfs/t2641/1/155842887/7225/c3a77729/57054133N3ad750d5.png',
+		'http://img11.360buyimg.com/cms/jfs/t2440/209/2412250070/4902/d7cbbd0e/57054133Nddcbaec6.png',
+		'http://img11.360buyimg.com/cms/jfs/t2650/344/142347812/1501/1175946f/57053219N151157a1.png',
+		'http://img10.360buyimg.com/cms/jfs/t2644/161/142442459/1526/6d14df96/57053219N26a9cf80.png'
+	];
+	var loaded = 0;
+	var timer = null;
+	var mockPercent = 0;
+	var doneTimer = null;
+	var tickTimer = null;
+	var second = 2;//想要的最短加载时间（如果在这个时间内能真正的加载完所有的资源）
+
+	loadImgs(config, function (){
+		document.getElementById('loaded-text').innerHTML = mockPercent+'%';
+
+		_('.bottle-tianchong').style.bottom = (100-mockPercent)/100*(-62)+'%';
+		
+		if(_('.bottle-tianchong').style.bottom > '0'){
+			_('.bottle-tianchong').style.bottom = '0';
+		}
+
+		if(mockPercent === 100){
+			$('.fruit-one').removeClass('pt-page-straght-down');
+			$('.fruit-one').css("opacity","0");
+			$('.bottle-content').addClass('pt-page-disappear');
+		}
+	}, function (){
+		//资源加载完毕回调
+		console.log( 'done')
+
+	} )
+
+	var _ = function(dom){
+		return document.querySelector(dom);
+	}
+	/*
+	* 加载图片资源
+	*/
+	function loadImgs( arr, loadingCallback,doneCallback ){
+		clearInterval( timer )
+		timer = setInterval(function (){
+			loadingCallback&&loadingCallback()
+			
+			if( mockPercent == 100 ){
+				clearInterval( timer );
+			}else{
+				mockPercent++;
+			}
+		}, 30)
+		clearInterval(tickTimer)
+		tickTimer = setInterval(function (){
+			
+			if( second == 0 ){
+				if( loaded == arr.length ){
+					clearInterval( tickTimer )
+					clearInterval( timer );
+					showDone()
+				}else{
+					clearInterval( tickTimer )
+					clearInterval( timer );
+				}
+			}else{
+				second --;
+			}
+		}, 1000) 
+		for( var i = 0, len = arr.length ; i < len ; i++ ){
+			var img = document.createElement('img');
+			var url = arr[i];
+			img.onload = function (){
+				loadingFn()
+			}
+			img.onerror = function (){
+				loadingFn()
+			}
+			img.src = url;
+
+		}
+
+		function loadingFn(){
+			loaded+=1;
+			var percent = Math.floor(loaded/len*100);
+			//console.log( percent )
+
+			
+			
+			if( loaded == len ){// 如果加载完所有的资源
+				showDone()
+				doneCallback&&doneCallback()
+			}
+		}
+
+		//
+		function showDone(){
+			clearInterval(doneTimer)
+			doneTimer = setInterval( function (){
+				loadingCallback&&loadingCallback()
+				
+				if( mockPercent == 100 ){
+					clearInterval( timer );
+				}else{
+					mockPercent++;
+				}
+			}, 30)
+		}
+	}
+
+</script>
+</html>
